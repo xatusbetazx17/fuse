@@ -1,0 +1,10 @@
+// patterns_adts.fuse — ADTs & match patterns
+type List[T] = Nil | Cons(T, List[T])
+
+fn len[T](xs: List[T]) -> Int =
+  match xs {
+    Nil -> 0,
+    Cons(_, rest) -> 1 + len(rest),
+  };
+
+print(len(Cons(1, Cons(2, Cons(3, Nil())))));

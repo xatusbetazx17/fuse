@@ -1,0 +1,14 @@
+// structured_concurrency.fuse — spawn workers and aggregate
+
+fn worker(id: Int, out) = {
+  send(out, id * id);
+};
+
+let ch = channel(0);
+spawn(worker, 1, ch);
+spawn(worker, 2, ch);
+spawn(worker, 3, ch);
+let a = recv(ch);
+let b = recv(ch);
+let c = recv(ch);
+print("sum:", a + b + c);

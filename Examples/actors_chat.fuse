@@ -1,0 +1,19 @@
+// actors_chat.fuse — multi-actor chat simulation
+
+fn printer(msg, _self) = { print("[printer]", msg); };
+
+fn user(name: Str, out) = {
+  fn loop(i: Int) -> Int =
+    if i < 3 {
+      send(out, (name, i));
+      sleep(10);
+      loop(i + 1)
+    } else { 0 };
+  loop(0)
+};
+
+let out = actor(printer);
+spawn(user, "alice", out);
+spawn(user, "bob", out);
+sleep(100);
+print("chat done");

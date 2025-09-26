@@ -1,0 +1,6 @@
+// dsl_macro_sql.fuse — toy SQL-like macro (surface only)
+
+macro select_users(active) = "/*sql*/ \"SELECT id, name FROM users WHERE active = ${active}\"";
+
+let q = select_users(true);
+print("query:", q);
