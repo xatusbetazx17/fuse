@@ -1,0 +1,22 @@
+// examples/os/logic.fuse — compiled to C and linked into the kernel
+
+type Option[T] = Some(T) | None
+
+trait Ord[T] { fn lt(T, T) -> Bool }
+impl Ord[Int] { fn lt(a, b) = a < b }
+
+fn meaning() -> Int = 42;
+fn banner() -> Str = "Hello from FUSE logic";
+
+fn add(a: Int, b: Int) -> Int = a + b;
+fn max2(a: Int, b: Int) -> Int = if a < b { b } else { a };
+fn demo_expr() -> Int = { let x: Int = 7; let y: Int = 5; (x * 3) + (y * 2) };
+
+fn max[T](a: T, b: T) -> T where Ord[T] = if Ord.lt[T](a, b) { b } else { a };
+
+fn maybe(flag: Bool) -> Option[Int] = if flag { Some(99) } else { None() };
+
+fn show(o: Option[Int]) -> Str =
+  match o { Some(x) -> "some", None -> "none" };
+
+fn choose(a: Int, b: Int) -> Int = max(a, b);
